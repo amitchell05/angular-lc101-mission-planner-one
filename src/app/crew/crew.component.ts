@@ -19,7 +19,17 @@ export class CrewComponent implements OnInit {
   ngOnInit(): void {}
 
   add(memberName: string, isFirst: boolean) {
-    this.crew.push({ name: memberName, firstMission: isFirst });
+    let memberExists: boolean = false;
+
+    this.crew.forEach((member: object) => {
+      if (member['name'] === memberName) {
+        memberExists = true;
+      }
+    });
+
+    if (!memberExists) {
+      this.crew.push({ name: memberName, firstMission: isFirst });
+    }
   }
 
   remove(member: object) {
